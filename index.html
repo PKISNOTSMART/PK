@@ -1,10 +1,237 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My BUET Website</title>
+  <meta charset="UTF-8" />
+  <title>Mock Google Sign-In</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #202124;
+      font-family: "Roboto", Arial, sans-serif;
+      color: #e8eaed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #1f1f1f;
+      margin-top: 80px;
+      padding: 40px 50px;
+      width: 800px;
+      max-width: 90%;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .left-side {
+      flex: 1;
+    }
+
+    .google-logo {
+      height: 40px;
+      margin-bottom: 40px;
+    }
+
+    .left-side h1 {
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .left-side p {
+      font-size: 15px;
+      color: #bdc1c6;
+    }
+
+    .right-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-label {
+      font-size: 14px;
+      color: #bdc1c6;
+      margin-bottom: 6px;
+    }
+
+    input {
+      background-color: #202124;
+      border: 1px solid #5f6368;
+      border-radius: 4px;
+      padding: 12px;
+      color: white;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #8ab4f8;
+      box-shadow: 0 0 0 1px #8ab4f8;
+    }
+
+    .forgot {
+      font-size: 14px;
+      color: #8ab4f8;
+      text-decoration: none;
+      margin-bottom: 24px;
+      cursor: pointer;
+    }
+
+    .extra-text {
+      font-size: 12px;
+      color: #bdc1c6;
+      margin-bottom: 10px;
+    }
+
+    .extra-text a {
+      color: #8ab4f8;
+      text-decoration: none;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .create {
+      background: none;
+      border: none;
+      color: #8ab4f8;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .next {
+      background-color: #8ab4f8;
+      color: #202124;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Initially hide password step */
+    #password-step {
+      display: none;
+      flex-direction: column;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #9aa0a6;
+      margin-bottom: 20px;
+    }
+
+    footer a {
+      color: #9aa0a6;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .right-side {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello from BUET site!</h1>
-  <p>Welcome to my GitHub Pages website.</p>
+
+  <div class="container">
+    <div class="left-side">
+      <img class="google-logo" src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google Logo" />
+      <h1>Sign in</h1>
+      <p>with your Google Account. This account will be available to other Google apps in the browser.</p>
+    </div>
+
+    <div class="right-side">
+      <!-- Email Step -->
+      <div id="email-step" style="display: flex; flex-direction: column;">
+        <label class="input-label" for="email">Email or phone</label>
+        <input type="email" id="email" placeholder="" autocomplete="username" />
+        <a class="forgot" href="#">Forgot email?</a>
+        <div class="extra-text">
+          Not your computer? Use Guest mode to sign in privately.
+          <a href="#">Learn more about using Guest mode</a>
+        </div>
+        <div class="button-group">
+          <button class="create">Create account</button>
+          <button class="next">Next</button>
+        </div>
+      </div>
+
+      <!-- Password Step -->
+      <div id="password-step">
+        <label class="input-label" for="password">Enter your password</label>
+        <input type="password" id="password" placeholder="" autocomplete="current-password" />
+        <a class="forgot" href="#">Forgot password?</a>
+        <div class="button-group" style="justify-content: flex-end;">
+          <button class="next">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>English (United States)</span>
+    <br />
+    <a href="#">Help</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+  </footer>
+
+  <script>
+    const emailStep = document.getElementById('email-step');
+    const passwordStep = document.getElementById('password-step');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const emailNextBtn = emailStep.querySelector('.next');
+    const passwordNextBtn = passwordStep.querySelector('.next');
+
+    // Email "Next" button handler
+    emailNextBtn.addEventListener('click', () => {
+      const email = emailInput.value.trim();
+      if (!email) {
+        alert('Please enter your email or phone.');
+        emailInput.focus();
+        return;
+      }
+
+      // Hide email step and show password step
+      emailStep.style.display = 'none';
+      passwordStep.style.display = 'flex';
+
+      passwordInput.focus();
+    });
+
+    // Password "Next" button handler
+    passwordNextBtn.addEventListener('click', () => {
+      const password = passwordInput.value.trim();
+      if (!password) {
+        alert('Please enter your password.');
+        passwordInput.focus();
+        return;
+      }
+
+      // Redirect to Gmail inbox (does NOT authenticate)
+      window.location.href = "https://mail.google.com/mail/u/0/#inbox";
+    });
+  </script>
 </body>
 </html>
